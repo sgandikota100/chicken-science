@@ -678,7 +678,7 @@ body {
     padding: 0;
     height: 100%;
     width: 100%;
-    overflow: hidden;
+    overflow: scroll;
   }
   body {
     text-rendering: optimizeLegibility;
@@ -695,7 +695,7 @@ body {
   body {
     user-select: none;
     -webkit-user-select: none;
-    overflow: scroll;
+    overflow: hidden;
   }
   body [contenteditable="true"],
   body [contenteditable=""] {
