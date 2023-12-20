@@ -695,7 +695,7 @@ body {
   body {
     user-select: none;
     -webkit-user-select: none;
-    overflow: hidden;
+    overflow: scroll;
   }
   body [contenteditable="true"],
   body [contenteditable=""] {
