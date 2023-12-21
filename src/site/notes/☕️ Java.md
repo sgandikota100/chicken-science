@@ -119,6 +119,12 @@ Source: Oracle
 
 ## [[Interfaces\|Interfaces]]
 
+## Classes 
+- [[Math Class\|Math Class]]
+- [[Print Steam Class\|Print Steam Class]]
+- [[String Class\|String Class]]
+- [[Wrapper Class\|Wrapper Class]]
+
 # Other Tools 
 - [[Maven\|Maven]]
 - [JavaFX] (you will never get a page...)
