@@ -4,7 +4,7 @@
 
 (aka Variable Arguments) - a ways to write methods that accept a variable number of arguments. 
 
-You could write [[Overloaded Methods\|Overloaded Methods]], but this simplifies the complexity. 
+You could write [[Classes#Overloaded Methods\|Overloaded Methods]], but this simplifies the complexity. 
 
 ```java
 /**
