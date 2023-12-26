@@ -82,7 +82,7 @@ object.equals("Bruh");             // true
 "Bruh".equals("Bruh");             // true 
 "Bruh".equals(new String("Bruh")); // true
 ```
-## [[Java Enum\|Java Enum]]
+## [[enumeration\|enumeration]]
 # Libraries
 In the Java Runtime Environment (JRE), there are various libraries built in that can be accessed in your code. Some, such as classes in `java.lang` like `Object`, `String`, or even basic data types (`int`, `boolean`). 
 
