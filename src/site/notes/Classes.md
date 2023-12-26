@@ -119,10 +119,139 @@ static void farmStatistics(int totalCrops, int totalAnimals) {
 Some key ideas here as these can be a bit tricky at first: 
 - Static Methods can *only* access static variables of a class -- they cant access any instance variables or methods within a class, unless they create an instance of that class  
 - They are associated with the class as a whole, NOT an instance of the class
-## Visibility Modifiers for Methods 
-- private: makes methods and data fields accessibility only from within its own class 
-	- `private int z;`
-- default: restricts access to the package 
-	- `int z;`
-- public: enables unrestricted access 
-	- `public int z;`
+
+### Static Variables 
+**Static variables** belong to the [[Classes\|class]] rather than instances (objects!) of the class and thus are shared among all objects of that class. These variables are declared using the `static` keyword, making them accessible ***without*** creating an instance of the class. Their importance lies in their ability to store data that is common to all instances of the class, avoiding redundant storage for each instance.
+
+Note: variables declared with `static final` are [[constants\|constants]]!
+Also Note: static variables cannot use the keyword `this` 
+
+```java
+public class Animals {
+    // Static variable to store the total number of animals on the farm
+    private static int totalAnimals = 0;
+
+    // Constructor increments the totalAnimals count when a new animal is added to the farm
+    public Animals() {
+        totalAnimals++;
+    }
+
+    // Static method to get the total number of animals on the farm
+    public static int getTotalAnimals() {
+        return totalAnimals;
+    }
+}
+```
+The `totalAnimals` static variable is shared among all instances of the `Animals` class. Each time a new animal is added to the farm (an instance of `Animals` is created), the static variable is incremented.
+## Overloaded Methods
+An **overloaded method** is simply where there are several methods with the same name, but different parameters in a class. Because we providing multiple ways to invoke a particular functionality, we can create more versatile and flexible code. 
+
+Feeding animals can be tricky, but rather than having so many animal feeding methods, we can simply have "one": 
+```java
+public class Feeding {
+    // Method for feeding a generic animal
+    public void feedAnimal(String animal) {
+        System.out.println("Feeding " + animal + " with general feed.");
+    }
+
+    // Overloaded method for feeding cows with specific feed
+    public void feedAnimal(String animal, String feedType) {
+        if (animal.equalsIgnoreCase("cow")) {
+            System.out.println("Feeding the cow with " + feedType + " feed.");
+        } else {
+            System.out.println("Feeding " + animal + " with general feed.");
+        }
+    }
+
+    // Overloaded method for feeding chickens with specific feed
+    public void feedAnimal(int numberOfChickens, String feedType) {
+        System.out.println("Feeding " + numberOfChickens + " chickens with " + feedType + " feed.");
+    }
+}
+
+```
+# Visibility Modifiers  
+**Visibility modifiers**, also referred to as *access modifiers*, are important in regulating the accessibility of classes, methods, and fields (such as variables). Here are the four main visibility modifiers in Java along with examples
+
+1. **Public:** The `public` modifier allows members to be accessed from any class, irrespective of the [[Package\|package]]. 
+```java
+public class MyFarm {
+    public int numApplesPicked;
+    /* other fields */
+    
+    public void collectApples() {
+        // code here
+    }
+    /* other methods */
+}
+```
+In another class, you can create a `MyFarm` object and use the `collectApples()` method and modify the `numApplesPicked` variable for the object. 
+
+2. **Private:** The `private` modifier restricts access to members only within the same class, making them invisible to other classes, even within the same package.
+```java
+public class MyCow {
+    private int farmID;
+    /* other fields */
+    
+    private void changefarmID() {
+        // code here
+    }
+    /* other methods */
+}
+```
+In another class, you can create a `MyCow` object, but you cannot change the `farmID` or access the `changefarmID()` method to modify a `MyCow` object's ID (in the real world, you wouldn't want people stealing your cows!). You can only access these two things from within the `MyCow` class. 
+
+3. **Protected**: The `protected` modifier enables access within the same class, the same package, and by subclasses, even if they belong to a different package.
+```java
+public class MyDoggo {
+    private String name;
+    protected int animalsEncounterd; 
+    /* other fields */
+    protected void encounterFriend() {
+        // code here
+    }
+    /* other methods */
+}
+```
+Other classes within the same package as `MyDoggo` and its subclasses (regardless of their package) can access and modify the `animalsEncountered` field and call the `encounterFriend()` method.
+
+4. **Default (Package-Private):** When no modifier is specified, the default visibility is package-private. Members with package-private visibility are accessible solely within the same package.
+```java
+package com.example.animals;
+
+class AnimalFarm {
+    private String farmName;
+    int numberOfAnimals; // package-private visibility
+
+    AnimalFarm(String name) {
+        this.farmName = name;
+        this.numberOfAnimals = 0;
+    }
+
+    void addAnimal() {
+        numberOfAnimals++;
+    }
+
+    void displayFarmInfo() {
+        System.out.println("Farm: " + farmName);
+        System.out.println("Number of Animals: " + numberOfAnimals);
+    }
+}
+```
+
+The `numberOfAnimals` field and the `addAnimal()` method have default (package-private) visibility because there is no explicit access modifier specified. So, they're only accessible within the same package, `com.example.animals`. Classes outside this package won't be able to access or modify `numberOfAnimals` directly. For instance, if you try to access `numberOfAnimals` from a class in a different package, it would result in a compilation error: 
+```java
+package com.example.other;
+
+public class Main {
+    public static void main(String[] args) {
+        AnimalFarm farm = new AnimalFarm("Happy Farm");
+        
+        // Compilation error: The field AnimalFarm.numberOfAnimals is not visible
+        // farm.numberOfAnimals = 10;
+        
+        // Compilation error: The method addAnimal() from the type AnimalFarm is not visible
+        // farm.addAnimal();
+    }
+}
+```
