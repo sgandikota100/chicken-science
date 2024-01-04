@@ -353,8 +353,8 @@ ul.task-list {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    @media (max-width: 1400px) {
-        position: fixed;
+    @media (max-width: 1000px) {
+        position: hidden;
     }
 
     @media (max-width: 800px) {
