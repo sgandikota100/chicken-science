@@ -97,6 +97,9 @@ Below we explore general categories of methods:
 - Every constructor ***must*** have the same name as the class. Constructors are essential in [[OOP\|object-oriented programming]] to ensure proper initialization and setup of objects when they are created.
 
 Above, we see that the constructor with parameters takes in a `name` and an `age` and initializes the respective instance variables `name` and `age` using this. By using this, we differentiate between the parameter variables and the instance variables with the same name.
+
+> [!WARNING] Note! 
+> A constructor is NOT considered to be "a member of the class" due to its role in object creation. Therefore, it will note be [[Inheritance\|inherited]] by subclasses 
 ## Void Methods 
 A void method is simply one that doesn't return anything back. 
 ```java
