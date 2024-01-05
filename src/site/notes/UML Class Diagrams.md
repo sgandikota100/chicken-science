@@ -81,3 +81,43 @@ As the diagrams start to get more complicated and connect with other classes, we
 Source : reading on UML diagrams 
 # A bigger picture 
 Let's dive into a more complex picture with some of the other features mentioned above (but not shown in the initial UML class diagram). 
+
+```mermaid
+classDiagram
+
+class `farm.Animal` {
+  -String name
+  +farm.Animal(String name)
+  +String getName()
+  +void makeSound()
+}
+class `farm.animal.mallardDuck` {
+  -int flightSpeed
+  +farm.animal.mallardDuck(String name, int flightSpeed)
+  +void fly()
+  +void quack()
+}
+class `farm.animal.rubberDuck` {
+  +farm.animal.rubberDuck(String name)
+  +void fly() <<Override>>
+  +void quack() <<Override>>
+}
+class CanFly {
+  <<interface>>
+  fly()
+}
+
+class CanQuack {
+  <<interface>>
+  quack()
+}
+
+`farm.Animal` <|-- `farm.animal.mallardDuck`
+`farm.Animal` <|-- `farm.animal.rubberDuck`
+
+CanFly <|.. `farm.animal.mallardDuck`
+CanFly <|.. `farm.animal.rubberDuck`
+
+CanQuack <|.. `farm.animal.mallardDuck`
+CanQuack <|.. `farm.animal.rubberDuck`
+```
